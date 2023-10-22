@@ -13,6 +13,7 @@ body {
 
 h1 {
     text-align: center;
+    font-size: 6vmin;
 }
 
 main {
@@ -24,13 +25,13 @@ main {
 }
 
 .calculator {
-    width: 23.5vmin;
+    width: 35.5vmin;
     border: 1px black solid;
     background-color: lightslategrey;
 }
 
 .calculator-display {
-    height: 5vmin;
+    height: 8vmin;
     margin: 1vmin;
     border: 1px black solid;
     background-color: white;
@@ -52,11 +53,13 @@ main {
     margin: 1vmin;
 }
 
-#calculator-button-reset, #calculator-button-delete {
-    width: 10.5vmin;
+#calculator-button-reset, 
+#calculator-button-delete {
+    width: 16.5vmin;
 }
+
 .calculator-button {
-    width: 5vmin;
-    height: 5vmin;
+    width: 8vmin;
+    height: 8vmin;
     font-size: 2vmin;
 }
