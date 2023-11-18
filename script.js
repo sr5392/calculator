@@ -1,17 +1,24 @@
 
 const display = document.querySelector(".calculator-display p");
 
-let number1 = "";
+let number1 = "0";
 let number2 = "";
 let operator = "";
+
+let isNewNumber = false;
 
 for (let i = 0; i <= 9; i++) {
     let button = document.querySelector("#calculator-button-number-" + i)
     button.addEventListener("click", () => {
         if (operator == "") {
-            number1 += i;
+            if (isNewNumber || number1 == "0") {
+                number1 = i.toString();
+                isNewNumber = false;
+            } else {
+                number1 += i.toString(); 
+            }
         } else {
-            number2 += i; 
+            number2 += i.toString(); 
         }
 
         updateDisplay();
@@ -20,11 +27,11 @@ for (let i = 0; i <= 9; i++) {
 
 const buttonReset = document.querySelector("#calculator-button-reset");
 buttonReset.addEventListener("click", () => {
-    number1 = "";
+    number1 = "0";
     number2 = "";
     operator = "";
 
-    display.innerText = "0";
+    updateDisplay();
 });
 
 const buttonDelete = document.querySelector("#calculator-button-delete");
@@ -32,7 +39,15 @@ buttonDelete.addEventListener("click", () => {
     if (operator == "") {
         number1 = number1.slice(0, -1);
     } else {
-        number2 = number2.slice(0, -1);
+        if (number2 == "") {
+            operator = "";
+        } else {
+            number2 = number2.slice(0, -1);
+        }
+    }
+
+    if (number1 == "") {
+        number1 = "0";
     }
 
     updateDisplay();
@@ -40,7 +55,11 @@ buttonDelete.addEventListener("click", () => {
 
 const buttonEquals = document.querySelector("#calculator-button-equals");
 buttonEquals.addEventListener("click", () => {
-    display.innerText = operate(operator, number1, number2);
+    number1 = operate(operator, parseFloat(number1), parseFloat(number2)).toString();
+    number2 = "";
+    operator = "";
+    isNewNumber = true;
+    updateDisplay();
 });
 
 const buttonAdd = document.querySelector("#calculator-button-add");
@@ -91,6 +110,29 @@ buttonDivide.addEventListener("click", () => {
     updateDisplay();;
 });
 
+const buttonDecimal = document.querySelector("#calculator-button-decimal");
+buttonDecimal.addEventListener("click", () => {
+    if (operator == "") {
+        if (!number1.includes(".")) {
+            if (number1 == "" || isNewNumber) {
+                number1 = "0";
+                isNewNumber = false;
+            }
+            number1 += ".";  
+        }
+    } else {
+        if (!number2.includes(".")) {
+            if (number2 == "") {
+                number2 = "0";
+            }
+            number2 += ".";
+        }
+    }   
+    
+    updateDisplay();;
+});
+
+
 function operate(operator, number1, number2) {
     switch (operator) {
         case "+":
@@ -105,6 +147,8 @@ function operate(operator, number1, number2) {
         case "/": 
             operator = divide;
             break;
+        default:
+            return number1;
     }
 
     return operator(number1, number2);
@@ -129,3 +173,4 @@ function multiply(number1, number2) {
 function updateDisplay() {
     display.innerText = number1 + " " + operator + " " + number2;
 }
+
