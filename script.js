@@ -1,4 +1,3 @@
-
 const display = document.querySelector(".calculator-display p");
 
 let number1 = "0";
@@ -55,9 +54,15 @@ buttonDelete.addEventListener("click", () => {
 
 const buttonEquals = document.querySelector("#calculator-button-equals");
 buttonEquals.addEventListener("click", () => {
+
+    if (number2 == "") {
+        number2 = number1;
+    }
+
     number1 = operate(operator, parseFloat(number1), parseFloat(number2)).toString();
     number2 = "";
     operator = "";
+
     isNewNumber = true;
     updateDisplay();
 });
@@ -128,10 +133,9 @@ buttonDecimal.addEventListener("click", () => {
             number2 += ".";
         }
     }   
-    
+
     updateDisplay();;
 });
-
 
 function operate(operator, number1, number2) {
     switch (operator) {
@@ -171,6 +175,11 @@ function multiply(number1, number2) {
 }
 
 function updateDisplay() {
-    display.innerText = number1 + " " + operator + " " + number2;
-}
+    let displayText = number1 + " " + operator + " " + number2;
 
+    if (displayText.length > 26) {
+        displayText = displayText.slice(0, 26);
+    }
+
+    display.innerText = displayText;
+}
