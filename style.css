@@ -28,6 +28,7 @@ main {
     width: 35.5vmin;
     border: 1px black solid;
     background-color: lightslategrey;
+    padding: 1.25vmin;
 }
 
 .calculator-display {
@@ -55,6 +56,7 @@ main {
 
 #calculator-button-reset, 
 #calculator-button-delete {
+    background-color: lightcoral;
     width: 16.5vmin;
 }
 
@@ -62,4 +64,19 @@ main {
     width: 8vmin;
     height: 8vmin;
     font-size: 2vmin;
+}
+
+#calculator-button-add,
+#calculator-button-subtract,
+#calculator-button-multiply,
+#calculator-button-divide {
+    background-color: lightgreen;
+}
+
+#calculator-button-equals {
+    background-color: lightblue;
+}
+
+#calculator-button-decimal {
+    background-color: lightgoldenrodyellow;
 }
