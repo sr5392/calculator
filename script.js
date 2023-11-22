@@ -69,49 +69,29 @@ buttonEquals.addEventListener("click", () => {
 
 const buttonAdd = document.querySelector("#calculator-button-add");
 buttonAdd.addEventListener("click", () => {
-    if (number2 != "") {
-        number1 = operate(operator, parseFloat(number1), parseFloat(number2)).toString();
-        number2 = "";
-    }
-
+    updateParameters();
     operator =  "+";
-
     updateDisplay();
 });
 
 const buttonSubtract = document.querySelector("#calculator-button-subtract");
 buttonSubtract.addEventListener("click", () => {
-    if (number2 != "") {
-        number1 = operate(operator, parseFloat(number1), parseFloat(number2)).toString();
-        number2 = "";
-    }
-
+    updateParameters();
     operator =  "-";
-
     updateDisplay();
 });
 
 const buttonMultiply = document.querySelector("#calculator-button-multiply");
 buttonMultiply.addEventListener("click", () => {
-    if (number2 != "") {
-        number1 = operate(operator, parseFloat(number1), parseFloat(number2)).toString();
-        number2 = "";
-    }
-
+    updateParameters();
     operator =  "*";
-
     updateDisplay();
 });
 
 const buttonDivide = document.querySelector("#calculator-button-divide");
 buttonDivide.addEventListener("click", () => {
-    if (number2 != "") {
-        number1 = operate(operator, parseFloat(number1), parseFloat(number2)).toString();
-        number2 = "";
-    }
-
+    updateParameters();
     operator =  "/";
-
     updateDisplay();;
 });
 
@@ -172,6 +152,14 @@ function divide(number1, number2) {
 
 function multiply(number1, number2) {
     return number1 * number2;
+}
+
+function updateParameters() {
+    if (number2 != "") {
+        number1 = operate(operator, parseFloat(number1), parseFloat(number2)).toString();
+        operator = "";
+        number2 = "";
+    }
 }
 
 function updateDisplay() {
